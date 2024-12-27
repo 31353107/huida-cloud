@@ -1,0 +1,38 @@
+server:
+  port: 18888
+
+spring:
+  application:
+    name: tlmall-gateway
+  cloud:
+    nacos:
+#      discovery:
+#        server-addr: tlmall-nacos-server:8848
+      config:
+        server-addr: huida-nacos-server:8848
+        file-extension: yml   #指定配置文件扩展名为yml
+
+#    gateway:
+#      #设置路由：路由id、路由到微服务的uri、断言
+#      routes:
+#        - id: order_route  #路由ID，全局唯一，建议配置服务名
+#          uri: lb://tlmall-order  #lb 整合负载均衡器loadbalancer
+#          predicates:
+#            - Path=/order/**   # 断言，路径相匹配的进行路由
+#
+#        - id: storage_route   #路由ID，全局唯一，建议配置服务名
+#          uri: lb://tlmall-storage  #lb 整合负载均衡器loadbalancer
+#          predicates:
+#            - Path=/storage/**   # 断言，路径相匹配的进行路由
+#
+#        - id: account_route   #路由ID，全局唯一，建议配置服务名
+#          uri: lb://tlmall-account  #lb 整合负载均衡器loadbalancer
+#          predicates:
+#            - Path=/account/**   # 断言，路径相匹配的进行路由
+
+  config:
+    import:
+      - optional:nacos:${spring.application.name}.yml
+      - nacos:nacos-discovery.yml
+
+
